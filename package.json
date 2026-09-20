@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "upload:firestore": "node scripts/upload_csvs_to_firestore.js",
+    "allow:user": "node scripts/set_user_access.js allow",
+    "deny:user": "node scripts/set_user_access.js deny"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.6.0"
+  }
+}

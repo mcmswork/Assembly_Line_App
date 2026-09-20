@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SeaSoul — Product Stock Allocator</title>
+  <link href="styles.css" rel="stylesheet"/>
+</head>
+<body>  
+
+<div id="authGate" class="modal-bg open" style="z-index:1000;">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-hdr">SeaSoul Sign In</div>
+    <form id="loginForm" class="modal-body">
+      <div class="mfield"><label for="loginEmail">Email</label><input id="loginEmail" class="inp" type="email" required autocomplete="email"></div>
+      <div class="mfield"><label for="loginPassword">Password</label><input id="loginPassword" class="inp" type="password" required autocomplete="current-password"></div>
+      <p id="loginError" style="display:none;color:var(--danger);font-size:13px;margin:8px 0 0;"></p>
+      <div class="modal-footer" style="padding:16px 0 0;"><button id="loginButton" class="btn btn-accent" type="submit">Sign In</button></div>
+    </form>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="hdr-icon">🌊</div>
+  <div><div class="hdr-title">SeaSoul Pro Kits</div><div class="hdr-sub">Product Stock Allocator</div></div>
+  <div class="hdr-date" id="hdrDate"></div>
+  <button id="logoutButton" class="btn btn-outline btn-sm" style="display:none;margin-left:auto;" type="button">Sign out</button>
+</header>
+
+<nav class="nav" id="navBar"></nav>
+
+<main class="main" id="mainArea"></main>
+
+<!-- ── ADD KIT MODAL ── -->
+<div class="modal-bg" id="addKitModal">
+  <div class="modal">
+    <div class="modal-hdr">Add New Kit Tab <button class="modal-close" onclick="closeModal('addKitModal')">×</button></div>
+    <div class="modal-body">
+      <div class="mfield"><label>Kit Name *</label><input class="inp" id="nkName" placeholder="e.g. Glow Bridal Kit"></div>
+      <div class="mfield"><label>Short Name (for tab)</label><input class="inp" id="nkShort" placeholder="e.g. Glow Bride" maxlength="14"></div>
+      <div class="mfield"><label>Order Quantity (number of kits)</label><input type="number" class="inp" id="nkQty" value="500" min="1"></div>
+      <div class="mfield">
+        <label>Tab Colour</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;" id="kitColourPicker"></div>
+        <input type="hidden" id="nkColour" value="#2471A3">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('addKitModal')">Cancel</button>
+      <button class="btn btn-accent" onclick="confirmAddKit()">➕ Add Kit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ADD PRODUCT TO KIT MODAL ── -->
+<div class="modal-bg" id="addKitItemModal">
+  <div class="modal">
+    <div class="modal-hdr">Add Product to Kit <button class="modal-close" onclick="closeModal('addKitItemModal')">×</button></div>
+    <div class="modal-body">
+      <div class="mfield"><label>Product Code</label>
+        <input type="text" class="inp" id="akiCodeInput" placeholder="Type product code e.g. 5" oninput="lookupAkiCode()" style="width:100%;">
+      </div>
+      <div id="akiProductPreview" style="display:none;background:#f0f7ff;border:1px solid #b3d4f5;border-radius:8px;padding:10px 14px;margin:4px 0 10px;font-size:13px;line-height:1.7;">
+      </div>
+      <div id="akiCodeError" style="display:none;color:#c0392b;font-size:12px;margin:-6px 0 8px;">Product code not found.</div>
+      <div class="mfield"><label>Section</label>
+        <select class="inp" id="akiSection" style="width:100%;">
+          <option>Main Kit</option><option>Facial Tools Kit</option><option>Home Care Kit</option><option>Add-On</option>
+        </select>
+      </div>
+      <div class="mfield"><label>Step / SNO.</label><input class="inp" id="akiStep" placeholder="e.g. 1, 7a, OPT"></div>
+      <div class="mfield"><label>Pieces per Kit *</label><input type="number" class="inp" id="akiPcs" value="6" min="1"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('addKitItemModal')">Cancel</button>
+      <button class="btn btn-accent" onclick="confirmAddKitItem()">Add Product</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-box" id="toastBox"></div>
+
+<script type="module" src="script.js?v=20260920"></script>
+</body>
+</html>
