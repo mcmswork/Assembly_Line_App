@@ -637,7 +637,7 @@ function editStock(prodId) {
   const cell = document.getElementById('stockCell_'+prodId);
   cell.innerHTML = `<div class="edit-row">
     <input type="number" class="inp inp-sm" id="se_${prodId}" value="${p.stock}" min="0">
-    <button class="btn btn-accent btn-xs" onclick="saveStock(${prodId})">Save</button>
+    <button class="btn btn-accent btn-xs" onclick="saveStock(${JSON.stringify(prodId).replace(/"/g,'&quot;')})">Save</button>
     <button class="btn btn-outline btn-xs" onclick="renderMain()">×</button>
   </div>`;
   document.getElementById('se_'+prodId).select();
@@ -656,7 +656,7 @@ function editMinStock(prodId) {
   const cell = document.getElementById('minStockCell_'+prodId);
   cell.innerHTML = `<div class="edit-row">
     <input type="number" class="inp inp-sm" id="ms_${prodId}" value="${p.minStock||0}" min="0" placeholder="0">
-    <button class="btn btn-accent btn-xs" onclick="saveMinStock(${prodId})">Save</button>
+    <button class="btn btn-accent btn-xs" onclick="saveMinStock(${JSON.stringify(prodId).replace(/"/g,'&quot;')})">Save</button>
     <button class="btn btn-outline btn-xs" onclick="renderMain()">×</button>
   </div>`;
   document.getElementById('ms_'+prodId).select();
