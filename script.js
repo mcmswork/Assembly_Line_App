@@ -306,24 +306,24 @@ function renderProducts() {
             return `<tr class="${rowCls}">
               <td style="text-align:center;font-size:12px;color:var(--muted);font-weight:700;width:40px;">${idx+1}</td>
               <td data-code="${p.code}" style="white-space:nowrap;" id="pmCodeCell_${p.id}">
-                <div class="editable-cell" onclick="editPMCode(${p.id})" title="Click to edit PM code">
+                <div class="editable-cell" onclick="editPMCode(${JSON.stringify(p.id)})" title="Click to edit PM code">
                   ${p.pmCode ? `<span class="code-pill" style="font-size:11px;letter-spacing:0;">${p.pmCode}</span>` : `<span class="code-pill">${p.code}</span>`}
                   <span class="edit-hint">✏️</span>
                 </div>
                 <div style="font-size:10px;color:var(--muted);margin-top:2px;">#${p.code}</div>
               </td>
               <td id="nameCell_${p.id}" data-name="${p.name.toLowerCase().replace(/"/g,'&quot;')}" style="font-weight:600;max-width:260px;">
-                <div class="editable-cell" onclick="editName(${p.id})" title="Click to edit name">
+                <div class="editable-cell" onclick="editName(${JSON.stringify(p.id)})" title="Click to edit name">
                   <span>${p.name}</span><span class="edit-hint">✏️</span>
                 </div>
               </td>
               <td id="sizeCell_${p.id}" style="color:var(--text2);">
-                <div class="editable-cell" onclick="editSize(${p.id})" title="Click to edit size">
+                <div class="editable-cell" onclick="editSize(${JSON.stringify(p.id)})" title="Click to edit size">
                   <span>${p.size||'—'}</span><span class="edit-hint">✏️</span>
                 </div>
               </td>
               <td id="matCell_${p.id}" style="color:var(--text2);">
-                <div class="editable-cell" onclick="editMat(${p.id})" title="Click to edit material">
+                <div class="editable-cell" onclick="editMat(${JSON.stringify(p.id)})" title="Click to edit material">
                   <span>${p.material||'—'}</span><span class="edit-hint">✏️</span>
                 </div>
               </td>
@@ -338,7 +338,7 @@ function renderProducts() {
                   ${minSt > 0
                     ? `<span class="badge ${urgent||rem<0?'b-danger':'b-gray'}" style="font-size:12px;">${urgent||rem<0?'🔔 ':''} ${N(minSt)}</span>`
                     : `<span style="color:var(--muted);font-size:12px;">—</span>`}
-                  <button class="btn btn-outline btn-xs" style="margin-top:3px;display:block;" onclick="editMinStock(${p.id})">✏️</button>
+                  <button class="btn btn-outline btn-xs" style="margin-top:3px;display:block;" onclick="editMinStock(${JSON.stringify(p.id)})">✏️</button>
                 </div>
               </td>
               <td style="color:var(--text2);font-weight:600;">${cons>0?'−'+N(cons):'—'}</td>
@@ -347,8 +347,8 @@ function renderProducts() {
               </span></td>
               <td>
                 <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                  <button class="btn btn-outline btn-sm btn-xs" onclick="editStock(${p.id})">✏️ Stock</button>
-                  <button class="btn btn-danger btn-xs" onclick="deleteProd(${p.id})">🗑️</button>
+                  <button class="btn btn-outline btn-sm btn-xs" onclick="editStock(${JSON.stringify(p.id)})">✏️ Stock</button>
+                  <button class="btn btn-danger btn-xs" onclick="deleteProd(${JSON.stringify(p.id)})">🗑️</button>
                 </div>
               </td>
             </tr>`;
