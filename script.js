@@ -1790,7 +1790,10 @@ async function loadFirestoreData() {
     renderNav(); renderMain();
   } catch (e) {
     console.error('Firestore load failed', e);
-    toast('Could not load data from Firestore', 'error');
+    const message = e.code === 'permission-denied'
+      ? 'Firestore denied access. Publish firestore.rules and sign in again.'
+      : `Could not load data from Firestore (${e.code || 'unknown error'})`;
+    toast(message, 'error');
   }
 }
 
@@ -1820,7 +1823,7 @@ onAuthStateChanged(auth, async user => {
     logoutButton.style.display = 'none';
     return;
   }
-  const token = await getIdTokenResult(user);
+  const token = await getIdTokenResult(user, true);
   if (token.claims.allowed !== true) {
     await signOut(auth);
     showAuthError('This account is not authorised to use the application.');
